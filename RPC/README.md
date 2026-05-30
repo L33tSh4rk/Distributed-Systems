@@ -245,8 +245,8 @@ action, adventure, animation, biography, comedy, crime, documentary, drama, fami
 history, horror, music, musical, mystery, romance, sci-fi, sport, thriller, war, western
 
 genres (comma separated): mystery, history
-cast (comma separated): allan, luiz feitosa
-directors (comma separated): campiolo
+cast (comma separated): allan, louis
+directors (comma separated): L33tSh4rk
 plot: a story of remote procedure calls
 [+] success. records returned: 1
 
@@ -255,8 +255,8 @@ plot: a story of remote procedure calls
     title   : the return of protocol buffer, now using grpc (2026)
     type    : movie
     genres  : mystery, history
-    cast    : allan, luiz feitosa
-    directors: campiolo
+    cast    : allan, louis
+    directors: l33tsh4rk
     plot    : a story of remote procedure calls
 ----------------------------------------
 
@@ -269,8 +269,8 @@ On the TypeScript server:
 [->] rpc received: CreateMovie
     payload: {
   genres: [ 'mystery', 'history' ],
-  cast: [ 'allan', 'luiz feitosa' ],
-  directors: [ 'campiolo' ],
+  cast: [ 'allan', 'louis' ],
+  directors: [ 'l33tsh4rk' ],
   title: 'the return of protocol buffer, now using grpc',
   year: 2026,
   type: 'movie',
@@ -294,13 +294,13 @@ target id: 6a0cdc477c572720f7ed6777
     title   : the return of protocol buffer, now using grpc (2026)
     type    : movie
     genres  : mystery, history
-    cast    : allan, luiz feitosa
-    directors: campiolo
+    cast    : allan, louis
+    directors: l33tsh4rk
     plot    : a story of remote procedure calls
 ----------------------------------------
 modifiable fields: TITLE, YEAR, TYPE, PLOT, CAST, DIRECTORS, GENRES
 field to modify: CAST
-new cast (comma separated): allan, luiz arthur feitosa, junior programmer
+new cast (comma separated): allan, louis, junior programmer
 [+] success. records returned: 1
 
 [*] record 1
@@ -308,8 +308,8 @@ new cast (comma separated): allan, luiz arthur feitosa, junior programmer
     title   : the return of protocol buffer, now using grpc (2026)
     type    : movie
     genres  : mystery, history
-    cast    : allan, luiz arthur feitosa, junior programmer
-    directors: campiolo
+    cast    : allan, louis, junior programmer
+    directors: l33tsh4rk
     plot    : a story of remote procedure calls
 ----------------------------------------
 
@@ -322,7 +322,7 @@ On the TypeScript server:
 [->] rpc received: UpdateMovie
      payload: {
   genres: [],
-  cast: [ 'allan', 'luiz arthur feitosa', 'junior programmer' ],
+  cast: [ 'allan', 'louis', 'junior programmer' ],
   directors: [],
   id: '6a0cdc477c572720f7ed6777'
 }
