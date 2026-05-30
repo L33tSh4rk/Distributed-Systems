@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+package movies;
+
+// mapeia metodos remotos que server expoe
+service MovieService {
+    // operacoes de mutacao
+    rpc CreateMovie (CreateMovieRequest) returns (MovieResponse);
+    rpc UpdateMovie (UpdateMovieRequest) returns (MovieResponse);
+    rpc DeleteMovie (MovieIdRequest) returns (DeleteResponse);
+    
+    // operacoes de leitura
+    rpc ReadMovie (MovieIdRequest) returns (MovieResponse);
+    rpc ListMoviesByActor (ActorRequest) returns (MovieListResponse);
+    rpc ListMoviesByCategory (CategoryRequest) returns (MovieListResponse);
+}
+
+// mensagens de requisicao
+message MovieIdRequest {
+    // id bson convertido em string
+    string id = 1; 
+}
+
+// parametros de busca para listagens
+message ActorRequest {
+    // nome exato ou parcial do ator
+    string actor_name = 1; 
+}
+
+message CategoryRequest {
+    // genero validado semanticamente
+    string category = 1; 
+}
+
+// payload para criacao - campos sao obrigatorios
+message CreateMovieRequest {
+    string title = 1;
+    int32 year = 2;
+    string type = 3;
+    string plot = 4;
+    repeated string genres = 5;
+    repeated string cast = 6;
+    repeated string directors = 7;
+}
+
+// payload atualizacao - isola defaults com optional
+message UpdateMovieRequest {
+    // identificador de alvo a ser alterado
+    string id = 1; 
+    
+    optional string title = 2;
+    optional int32 year = 3;
+    optional string type = 4;
+    optional string plot = 5;
+    
+    // arrays vazios tratados nativamente
+    repeated string genres = 6;
+    repeated string cast = 7;
+    repeated string directors = 8;
+}
+
+
+// espelho do documento mongodb
+message MovieResponse {
+    string id = 1;
+    string title = 2;
+    int32 year = 3;
+    string type = 4;
+    string plot = 5;
+    repeated string genres = 6;
+    repeated string cast = 7;
+    repeated string directors = 8;
+}
+
+// empacota registros para buscas em lote
+message MovieListResponse {
+    // array de filmes
+    repeated MovieResponse movies = 1; 
+}
+
+// confirmacao para instrucoes de delecao
+message DeleteResponse {
+    // true para delecao executada
+    bool success = 1; 
+}

@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  # motor do server
+  rpc-server:
+    build: ./serverTS
+    container_name: rpc_server
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./serverTS/.env 
+    networks:
+      - rpc_net
+
+  # cliente
+  rpc-client:
+    build: ./clientPY
+    container_name: rpc_client
+    # terminal vivo que aguarda input
+    stdin_open: true 
+    tty: true
+    depends_on:
+      - rpc-server 
+    environment:
+      # injeta dns do container servidor como variavel
+      - GRPC_SERVER_URL=rpc-server:3000 
+    networks:
+      - rpc_net
+
+# rede virtual
+networks:
+  rpc_net:
+    driver: bridge
