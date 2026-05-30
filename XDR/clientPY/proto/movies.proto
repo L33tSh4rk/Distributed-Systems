@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package movies;
+
+// representacao do filme conforme base mflix
+message Movie {
+  string _id = 1;
+  string plot = 2;
+  repeated string genres = 3;
+  int32 runtime = 4;
+  repeated string cast = 5;
+  int32 num_mflix_comments = 6;
+  string title = 7;
+  string fullplot = 8;
+  repeated string countries = 9;
+  string released = 10;
+  repeated string directors = 11;
+  string rated = 12;
+  string lastupdated = 13;
+  int32 year = 14;
+  string type = 15;
+}
+
+// envelope padrao para recebimento de instrucoes
+message RequestPayload {
+  string operation = 1; 
+  string movie_id = 2;
+  Movie movie_data = 3;
+  string filter_actor = 4;
+  string filter_category = 5;
+}
+
+// envelope padrao para devolucao de dados ou erros
+message ResponsePayload {
+  bool success = 1;
+  string error_message = 2;
+  repeated Movie data = 3;
+}

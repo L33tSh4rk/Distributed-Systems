@@ -1,0 +1,32 @@
+services:
+  server:
+    build:
+      context: ./serverTS
+      dockerfile: Dockerfile
+    container_name: xdr_server
+    ports:
+      - "3000:3000"
+  
+    env_file:
+      - ./serverTS/.env
+    networks:
+      - xdr_net
+    restart: unless-stopped
+
+  client:
+    build:
+      context: ./clientPY
+      dockerfile: Dockerfile
+    container_name: xdr_client
+    environment:
+      - SERVER_HOST=server
+      - SERVER_PORT=3000
+    networks:
+      - xdr_net
+
+    stdin_open: true 
+    tty: true
+
+networks:
+  xdr_net:
+    driver: bridge
